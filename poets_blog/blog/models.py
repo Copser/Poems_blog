@@ -15,5 +15,4 @@ class Post(models.Model):
         :returns: TODO
 
         """
-        return str(self.id) + "/" + str(self.created_at) + "/" + \
-            self.title + "/" + self.content + "\n"
+        return self.title + "/" + self.content
