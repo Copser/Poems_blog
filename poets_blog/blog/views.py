@@ -20,12 +20,13 @@ def index(request):
     return HttpResponse(t.render(c))
 
 
-def post(request, post_id):
+def post(request, post_url):
     """TODO: Docstring for post.
     :returns: TODO
 
     """
-    single_post = get_object_or_404(Post, pk=post_id)
+    single_post = get_object_or_404(Post,
+                                    title=post_url.replace('_', ' '))
     t = loader.get_template('blog/post.html')
     c = Context({'single_post': single_post, })
     return HttpResponse(t.render(c))
