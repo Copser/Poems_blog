@@ -13,7 +13,10 @@ def index(request):
     """
     latest_posts = Post.objects.all().order_by('-created_at')
     t = loader.get_template('blog/index.html')
-    c = Context({'latest_posts': latest_posts, })
+    context_dict = {'latest_posts': latest_posts, }
+    for post in latest_posts:
+        post.url = post.title.replace(' ', '_')
+    c = Context(context_dict)
     return HttpResponse(t.render(c))
 
 
