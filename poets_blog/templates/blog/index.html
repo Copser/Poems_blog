@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="row">
+    <div class="col-md-8">
     {% if latest_posts %}
         <ul>
         {% for post in latest_posts %}
@@ -11,5 +13,14 @@
         {% endfor %}
         </ul>
     {% endif %}
-    
-{% endblock content %}
+    </div>
+    <div class="col-md-4">
+    <h4>Najpopularnije objave:</h4>    
+    <ul>
+        {% for popular_post in popular_posts %}
+        <li><a href="/blog/{{ popular_post.url }}" target="">{{ popular_post.title }}</a></li>
+    {% endfor %}
+    </ul>
+</div>
+</div>
+    {% endblock content %}
