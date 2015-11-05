@@ -20,6 +20,8 @@ def index(request):
     }
     for post in latest_posts:
         post.url = post.title.replace(' ', '_')
+    for popular_post in popular_posts:
+        popular_post.url = popular_post.title.replace(' ', '_')
     c = Context(context_dict)
     return HttpResponse(t.render(c))
 
