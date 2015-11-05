@@ -6,14 +6,16 @@ from blog.models import Post
 # Create your views here.
 
 
-# Helper function for index and posts
-def encode_url(url):
-    """TODO: Docstring for encode_url.
+def get_popular_posts():
+    """TODO: Helper function to get_popular_posts.
     :returns: TODO
 
     """
-    return url.replace(' ', '_')
+    popular_posts = Post.objects.order_by('-views')[:5]
+    return popular_posts
 
+
+# Views Functions
 
 def index(request):
     """TODO: Docstring for index.
@@ -21,29 +23,27 @@ def index(request):
 
     """
     latest_posts = Post.objects.all().order_by('-created_at')
-    popular_posts = Post.objects.order_by('-views')[:5]
     t = loader.get_template('blog/index.html')
     context_dict = {
         'latest_posts': latest_posts,
-        'popular_posts': popular_posts,
+        'popular_posts': get_popular_posts(),
     }
-    for post in latest_posts:
-        post.url = encode_url(post.title)
-    for popular_post in popular_posts:
-        popular_post.url = encode_url(popular_post.title)
     c = Context(context_dict)
     return HttpResponse(t.render(c))
 
 
-def post(request, post_url):
+def post(request, slug):
     """TODO: Docstring for post.
     :returns: TODO
 
     """
-    single_post = get_object_or_404(Post,
-                                    title=post_url.replace('_', ' '))
-    single_post.views += 1
-    single_post.save()
+    single_post = get_object_or_404(Post, slug=slug)
+    single_post.views += 1  # increment the number of views
+    single_post.save()  # and save it
     t = loader.get_template('blog/post.html')
-    c = Context({'single_post': single_post, })
+    context_dict = {
+        'single_post': single_post,
+        'popular_posts': get_popular_posts(),
+    }
+    c = Context(context_dict)
     return HttpResponse(t.render(c))
