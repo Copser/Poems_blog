@@ -6,6 +6,15 @@ from blog.models import Post
 # Create your views here.
 
 
+# Helper function for index and posts
+def encode_url(url):
+    """TODO: Docstring for encode_url.
+    :returns: TODO
+
+    """
+    return url.replace(' ', '_')
+
+
 def index(request):
     """TODO: Docstring for index.
     :returns: TODO
@@ -19,9 +28,9 @@ def index(request):
         'popular_posts': popular_posts,
     }
     for post in latest_posts:
-        post.url = post.title.replace(' ', '_')
+        post.url = encode_url(post.title)
     for popular_post in popular_posts:
-        popular_post.url = popular_post.title.replace(' ', '_')
+        popular_post.url = encode_url(popular_post.title)
     c = Context(context_dict)
     return HttpResponse(t.render(c))
 
