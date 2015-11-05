@@ -27,6 +27,6 @@ class Post(models.Model):
         :returns: TODO
 
         """
-        self.slug = uuslug(self.title, isinstance=self,
+        self.slug = uuslug(self.title, instance=self,
                            max_length=100)
         super(Post, self).save(*args, **kwargs)
