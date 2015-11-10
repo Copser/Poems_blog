@@ -2,25 +2,30 @@
 
 {% block content %}
 <div class="row">
-    <div class="col-md-8">
-    {% if latest_posts %}
-        <ul>
-        {% for post in latest_posts %}
-            <h3><a href="/blog/{{ post.slug }}">{{ post.title }}</a></h3>
-            <p><em>{{ post.created_at }}</em></p>
-            <p>{{ post.content }}</p>
-            <br />
-        {% endfor %}
-        </ul>
-    {% endif %}
+    <div class="col-xs-12 col-md-8">
+        <div class="panel panel-deafault">
+        {% if latest_posts %}
+            <ul>
+            {% for post in latest_posts %}
+                <div class="panel-heading">
+                    <h3><a href="/blog/{{ post.slug }}">{{ post.title }}</a></h3>
+                </div>
+                <p class="text-info"><em>{{ post.created_at }}</em></p>
+                <div class="panel-body">
+                <p>{{ post.content }}</p>
+                <br />
+                </div>
+            {% endfor %}
+            </ul>
+        {% endif %}
+        </div>
     </div>
-    <div class="col-md-4">
-    <h4>Najpopularnije objave:</h4>    
-    <ul>
+<div class="col-xs-12 col-md-4">
+    <h3 class="text-info panel-heading">Najpopularnije objave:</h3>    
+    <ul class="list-group list-unstyled">
         {% for popular_post in popular_posts %}
-        <li><a href="/blog/{{ popular_post.slug }}" target="">{{ popular_post.title }}</a></li>
+            <h4><li class="list-grup-item"><a href="/blog/{{ popular_post.slug }}" target="">{{ popular_post.title }}</a></li></h4>
     {% endfor %}
     </ul>
-</div>
 </div>
     {% endblock content %}
