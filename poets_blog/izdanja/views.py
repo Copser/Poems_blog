@@ -17,5 +17,5 @@ def izdanja(request):
     knjiga koju je napisao.
 
     """
-    return render_to_response('izdanja.html',
+    return render_to_response('blog/flipbook/izdanja.html',
                               context_instance=RequestContext(request))
