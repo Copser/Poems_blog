@@ -15,5 +15,5 @@ def izdanja(request):
     o profesoru, njegovom ziotu i slicno.
 
     """
-    return render_to_response('izdanja.html',
+    return render_to_response('blog/izdanja.html',
                               context_instance=RequestContext(request))
