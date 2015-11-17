@@ -20,10 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'k(krj+hfj^ws(atft(f74lmjyggdw@*gl1)ltio=pwik%r8+0#'
+with open('poets_blog/secret_key.txt') as f:
+    SECRET_KEY = f.read().strip()
+# SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -81,11 +83,11 @@ WSGI_APPLICATION = 'poets_blog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'pero_db',
-        'USER': 'petarp',
-        'PASSWORD': 'gnomeregan',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': '',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
     }
 }
 
@@ -115,3 +117,21 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+
+# Exstending setting.py to local_settings.py
+# Allow all hosts/domain names for this site
+ALLOWED_HOSTS = ["*"]
+
+# Parse database configuration from $DATABASE_URL
+import dj_database_url
+
+DATABASE = {'default': dj_database_url.config()}
+
+# Honor the 'X-Forwarded-Proto' header for request.is_secure()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# try to load local_settings.py if it exists
+try:
+    from local_settings import *
+except Exception as e:
+    pass
