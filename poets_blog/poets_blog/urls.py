@@ -23,5 +23,4 @@ urlpatterns = [
     url(r'^izdanja/', 'izdanja.views.izdanja', name='izdanja'),
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
         {'document_root': MEDIA_ROOT}),
-
 ]
