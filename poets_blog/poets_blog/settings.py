@@ -152,7 +152,7 @@ def get_cache():
         os.environ["MEMCACHE_PASSWORD"] = os.environ["MEMCACHIER_PASSWORD"]
         return {
             'default': {
-                'BACKEND': 'django_pylibmc.memcache.PyLibMCCache',
+                'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
                 'TIMEOUT': 300,
                 'BINARY': True,
                 'OPTIONS': {'tcp_nodeplay': True}
