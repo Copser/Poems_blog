@@ -155,7 +155,22 @@ def get_cache():
                 'BACKEND': 'django_pylibmc.memcached.PyLibMCCache',
                 'TIMEOUT': 300,
                 'BINARY': True,
-                'OPTIONS': {'tcp_nodeplay': True}
+                'OPTIONS': {'tcp_nodelay': True,
+
+                            # Keep connection alive
+                            'tcp_keepalive': True,
+
+                            # Timeout for set/get requests
+                            '_poll_timeout': 2000,
+
+                            # Use consistent hashing for failover
+                            'ketama': True,
+
+                            # Configure failover timings
+                            'connect_timeout': 2000,
+                            'remove_failed': 4,
+                            'retry_timeout': 2,
+                            'dead_timeout': 10}
             }
         }
     except:
