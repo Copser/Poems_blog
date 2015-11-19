@@ -5,6 +5,7 @@ argparse==1.2.1
 dj-database-url==0.3.0
 dj-static==0.0.6
 django-audiotracks==0.2.4
+django-pylibmc-sasl==0.2.4
 django-toolbelt==0.0.1
 django-uuslug==1.1.6
 foreman==0.9.7
@@ -12,6 +13,7 @@ futures==3.0.3
 gunicorn==19.3.0
 mutagen==1.22
 psycopg2==2.6.1
+pylibmc==1.5.0
 python-slugify==1.1.4
 requests==2.8.1
 requests-futures==0.9.5
