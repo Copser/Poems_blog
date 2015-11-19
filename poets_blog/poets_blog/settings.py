@@ -51,6 +51,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    # middleware classes for memcache configuration
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
 ROOT_URLCONF = 'poets_blog.urls'
@@ -124,6 +128,7 @@ try:
 except Exception, e:
     pass
 
+<<<<<<< HEAD
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -132,3 +137,37 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = (
 #    os.path.join(BASE_DIR, "static"),
 #  )
+=======
+
+# Memcached configuration/Memcache konfiguracija
+def get_cache():
+    """TODO: Docstring for get_cache.
+    :returns: TODO
+
+    """
+    import os
+    try:
+        os.environ["MEMCACHE_SERVERS"] = os.environ["MEMCACHIER_SERVERS"].\
+            replace(',', ';')
+        os.environ["MEMCACHE_USERNAME"] = os.environ["MEMCACHIER_USERNAME"]
+        os.environ["MEMCACHE_PASSWORD"] = os.environ["MEMCACHIER_PASSWORD"]
+        return {
+            'default': {
+                'BACKEND': 'django_pylibmc.memcache.PyLibMCCache',
+                'TIMEOUT': 300,
+                'BINARY': True,
+                'OPTIONS': {'tcp_nodeplay': True}
+            }
+        }
+    except:
+        return {
+            'default': {
+                'BACKEND': 'django.core.cache.backends.locmem.LocMemCache'
+            }
+        }
+
+CACHES = get_cache()
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 300
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+>>>>>>> deploy_to_heroku
