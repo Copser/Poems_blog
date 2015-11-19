@@ -128,7 +128,6 @@ try:
 except Exception, e:
     pass
 
-<<<<<<< HEAD
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -137,7 +136,7 @@ STATIC_URL = '/static/'
 # STATICFILES_DIRS = (
 #    os.path.join(BASE_DIR, "static"),
 #  )
-=======
+
 
 # Memcached configuration/Memcache konfiguracija
 def get_cache():
@@ -170,4 +169,3 @@ CACHES = get_cache()
 CACHE_MIDDLEWARE_ALIAS = 'default'
 CACHE_MIDDLEWARE_SECONDS = 300
 CACHE_MIDDLEWARE_KEY_PREFIX = ''
->>>>>>> deploy_to_heroku
