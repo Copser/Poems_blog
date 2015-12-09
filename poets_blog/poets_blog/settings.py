@@ -40,6 +40,7 @@ INSTALLED_APPS = (
 
     # Local app
     'blog',
+    'music_player',
 )
 
 MIDDLEWARE_CLASSES = (
